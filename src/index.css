@@ -1,1 +1,219 @@
 @import "tailwindcss";
+
+/*
+  Terminal / ANSI design tokens. Accent is derived from the mark in
+  public/favicon.svg (#863bff) — lightened to #a97dff so it clears AA
+  contrast on the near-black ground when used for text.
+*/
+@theme {
+  --color-ground: #08070c;
+  --color-panel: #0e0c15;
+  --color-line: #1e1a2b;
+  --color-line-strong: #2e2842;
+  --color-dim: #8b85a3;
+  --color-ink: #c5c0d6;
+  --color-bright: #efecf7;
+  --color-accent: #a97dff;
+  --color-accent-deep: #863bff;
+
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    "DejaVu Sans Mono", monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Sticky bar clearance for in-page anchors. */
+  :target,
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-accent) 35%, transparent);
+    color: var(--color-bright);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* --- shared terminal chrome ------------------------------------------ */
+
+  /*
+    Tracking and size both shrink on narrow viewports: at a fixed .22em the
+    longer strings ("LOCAL / COLLABORATIVE / RESPONSIBLE") overflow a phone.
+  */
+  .term-meta {
+    font-size: clamp(0.625rem, 2.3vw, 0.6875rem);
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: clamp(0.1em, 0.75vw, 0.2em);
+    color: var(--color-dim);
+  }
+
+  .term-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .term-label > :first-child {
+    color: var(--color-accent);
+  }
+
+  .term-label::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      var(--color-line-strong),
+      transparent
+    );
+  }
+
+  /* Wraps instead of overflowing once the two halves stop fitting. */
+  .term-split {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .brand-triangle {
+    width: 0;
+    height: 0;
+    border-block: 5px solid transparent;
+    border-inline-start: 8px solid var(--color-accent);
+  }
+
+  .status-dot {
+    animation: status-pulse 2.6s ease-in-out infinite;
+  }
+
+  @keyframes status-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0
+        color-mix(in oklab, var(--color-accent) 55%, transparent);
+    }
+    60% {
+      opacity: 0.55;
+      box-shadow: 0 0 0 4px transparent;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status-dot {
+      animation: none;
+    }
+  }
+
+  /* --- ANSI lockup ----------------------------------------------------- */
+
+  .ansi-lockup {
+    text-align: center;
+  }
+
+  .ansi-art {
+    position: relative;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+    white-space: pre;
+    font-family: var(--font-mono);
+    line-height: 1.03;
+    color: var(--color-bright);
+    text-shadow:
+      0 0 1px color-mix(in oklab, var(--color-accent) 40%, transparent),
+      0 0 24px color-mix(in oklab, var(--color-accent-deep) 30%, transparent);
+  }
+
+  /* Faint offset echo, for depth. Kept low-contrast so the art stays crisp. */
+  .ansi-art::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: var(--color-accent);
+    opacity: 0.3;
+    transform: translate(1px, -1px);
+    text-shadow: none;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  /*
+    The art is a fixed character grid, so it can only stay unbroken if the
+    font size tracks the container width. Sizes below are
+    (fill fraction) / (columns x monospace advance ratio ~0.61):
+      wordmark  75 cols, fills the container
+      LCR       24 cols, fills ~55% so the two lines stack as one lockup
+    The vw values are the pre-container-query fallback.
+  */
+  .ansi-art-wide {
+    font-size: min(2.02vw, 15.7px);
+  }
+
+  .ansi-art-lcr {
+    margin-top: 0.5rem;
+    font-size: min(3.54vw, 27.5px);
+  }
+
+  @supports (font-size: 1cqi) {
+    .ansi-lockup {
+      container-type: inline-size;
+    }
+
+    .ansi-art-wide {
+      font-size: calc(100cqi * 0.0218);
+    }
+
+    .ansi-art-lcr {
+      margin-top: 1.5cqi;
+      font-size: calc(100cqi * 0.0382);
+    }
+  }
+
+  /* --- CRT atmosphere --------------------------------------------------- */
+
+  .crt-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background-image:
+      radial-gradient(
+        90rem 40rem at 50% -10%,
+        color-mix(in oklab, var(--color-accent-deep) 14%, transparent),
+        transparent 70%
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgb(255 255 255 / 0.016) 0 1px,
+        transparent 1px 3px
+      );
+  }
+}

@@ -5,7 +5,8 @@ import { Hero } from './components/Hero'
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-ground">
+      <div className="crt-overlay" aria-hidden="true" />
       <Header />
       <main>
         <Hero />

@@ -1,10 +1,15 @@
 export function Events() {
   return (
-    <section id="events" className="mx-auto max-w-3xl px-6 py-16">
-      <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
+    <section id="events" className="mx-auto max-w-3xl px-6 pb-20">
+      <div className="term-meta term-label" aria-hidden="true">
+        <span>02</span>
+        <span>Events_feed</span>
+      </div>
+
+      <h2 className="mt-8 text-lg tracking-tight text-bright sm:text-xl">
         Upcoming events
       </h2>
-      <p className="mt-2 text-neutral-600">
+      <p className="mt-2 text-sm text-dim">
         Registration is handled through Luma.
       </p>
 
@@ -17,9 +22,13 @@ export function Events() {
         want fully custom-styled event cards instead of Luma's own widget
         (and that needs a Luma Plus subscription plus something server-side
         to keep the API key off the client).
+
+        Luma's widget brings its own styling, which will most likely land
+        light on this dark page — check the embed dialog for a theme option
+        before reaching for CSS overrides on someone else's iframe.
       */}
-      <div className="mt-6 rounded-lg border border-dashed border-neutral-300 p-8 text-center text-sm text-neutral-500">
-        Luma calendar embed goes here
+      <div className="mt-8 border border-dashed border-line-strong bg-panel px-6 py-12 text-center">
+        <span className="term-meta">Luma calendar embed goes here</span>
       </div>
     </section>
   )
