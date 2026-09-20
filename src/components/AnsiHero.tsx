@@ -36,7 +36,7 @@ export function AnsiHero() {
 
       <div className="ansi-icon-wrap" aria-hidden="true">
         <img
-          src="/liver_bird_sq_icon.png"
+          src="/liver_bird_sq_icon_transparent.png"
           alt=""
           className="ansi-icon"
         />
@@ -57,7 +57,7 @@ export function AnsiHero() {
         className="term-meta term-split mt-8 border-t border-line pt-3 sm:mt-10"
         aria-hidden="true"
       >
-        <span>Local / Collaborative / Responsible</span>
+        <span>Coworking / Demos / Hackathons</span>
         <span>Est. 2026</span>
       </div>
     </div>
