@@ -34,6 +34,14 @@ export function AnsiHero() {
     <div>
       <h1 className="sr-only">AI Builders LCR</h1>
 
+      <div className="ansi-icon-wrap" aria-hidden="true">
+        <img
+          src="/liver_bird_sq_icon.png"
+          alt=""
+          className="ansi-icon"
+        />
+      </div>
+
       <div className="ansi-lockup mt-8 sm:mt-10" aria-hidden="true">
         <pre className="ansi-art ansi-art-wide" data-text={WORDMARK}>
           {WORDMARK}
@@ -42,6 +50,8 @@ export function AnsiHero() {
           {LCR}
         </pre>
       </div>
+
+      <div className="ansi-divider" aria-hidden="true" />
 
       <div
         className="term-meta term-split mt-8 border-t border-line pt-3 sm:mt-10"

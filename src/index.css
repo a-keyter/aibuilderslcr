@@ -133,6 +133,37 @@
 
   /* --- ANSI lockup ----------------------------------------------------- */
 
+  .ansi-icon-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .ansi-icon {
+    display: block;
+    width: clamp(8rem, 18vw, 12rem);
+    height: auto;
+    filter:
+      drop-shadow(0 0 2px rgba(169, 125, 255, 0.85))
+      drop-shadow(0 0 18px rgba(169, 125, 255, 0.45));
+  }
+
+  .ansi-divider {
+    width: min(28rem, 62%);
+    height: 1.25rem;
+    margin: 0.75rem auto 0;
+    background-image: radial-gradient(
+      circle,
+      rgba(169, 125, 255, 0.95) 0,
+      rgba(169, 125, 255, 0.95) 1.2px,
+      transparent 1.5px
+    );
+    background-size: 0.9rem 0.9rem;
+    background-repeat: repeat-x;
+    background-position: center;
+    opacity: 0.9;
+  }
+
   .ansi-lockup {
     text-align: center;
   }
