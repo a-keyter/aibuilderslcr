@@ -4,5 +4,6 @@
       <rect width="100" height="100" rx="22" />
     </clipPath>
   </defs>
+  <rect width="100" height="100" rx="22" fill="#08070c" />
   <image href="/liver_bird_sq_icon.png" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#rounded-corners)" />
 </svg>
