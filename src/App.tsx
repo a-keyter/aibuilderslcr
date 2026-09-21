@@ -1,18 +1,12 @@
-import { Events } from './components/Events'
-import { Footer } from './components/Footer'
-import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 
 function App() {
   return (
-    <div className="min-h-screen bg-ground">
+    <div className="poster-stage min-h-screen bg-ground">
       <div className="crt-overlay" aria-hidden="true" />
-      <Header />
       <main>
         <Hero />
-        <Events />
       </main>
-      <Footer />
     </div>
   )
 }

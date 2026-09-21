@@ -33,6 +33,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  #root {
+    min-height: 100vh;
+  }
+
   /* Sticky bar clearance for in-page anchors. */
   :target,
   section[id] {
@@ -57,6 +61,80 @@
 }
 
 @layer components {
+  .poster-stage {
+    display: grid;
+    min-height: 100vh;
+    place-items: start center;
+    padding: 2rem;
+    background:
+      radial-gradient(ellipse at 50% 18%, rgb(47 15 76 / 0.32), transparent 34rem),
+      linear-gradient(135deg, #08070c 0%, #0d0712 48%, #050409 100%);
+  }
+
+  .poster {
+    position: relative;
+    display: flex;
+    width: 800px;
+    min-height: 2100px;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding: 142px 76px 76px;
+    background:
+      radial-gradient(ellipse at 50% 22%, rgb(107 35 173 / 0.13), transparent 31rem),
+      linear-gradient(180deg, #09070d 0%, #050409 100%);
+    box-shadow: 0 2rem 6rem rgb(0 0 0 / 0.45);
+    text-align: center;
+  }
+
+  .poster::before {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 0.018) 0 1px,
+      transparent 1px 4px
+    );
+    content: "";
+    pointer-events: none;
+  }
+
+  .poster-copy {
+    margin-top: 122px;
+    color: var(--color-bright);
+    font-size: 29px;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+
+  .poster-rule {
+    width: 485px;
+    max-width: 100%;
+    height: 10px;
+    margin-top: 66px;
+    background-image: radial-gradient(circle, var(--color-accent) 0 4px, transparent 5px);
+    background-size: 34px 10px;
+    background-position: center;
+  }
+
+  .poster-invite {
+    margin-top: 70px;
+    color: var(--color-ink);
+    font-size: 22px;
+    line-height: 1.7;
+  }
+
+  .poster-footer {
+    display: flex;
+    gap: 18px;
+    margin-top: auto;
+    color: var(--color-accent);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
   /* --- shared terminal chrome ------------------------------------------ */
 
   /*
@@ -141,7 +219,7 @@
 
   .ansi-icon {
     display: block;
-    width: clamp(8rem, 18vw, 12rem);
+    width: 235px;
     height: auto;
     filter:
       drop-shadow(0 0 2px rgba(169, 125, 255, 0.85))
@@ -205,12 +283,55 @@
     The vw values are the pre-container-query fallback.
   */
   .ansi-art-wide {
-    font-size: min(2.02vw, 15.7px);
+    font-size: 16.8px;
   }
 
   .ansi-art-lcr {
     margin-top: 0.5rem;
-    font-size: min(3.54vw, 27.5px);
+    font-size: 29px;
+  }
+
+  @media (max-width: 840px) {
+    .poster-stage {
+      padding: 0;
+    }
+
+    .poster {
+      width: 100vw;
+      min-height: min(262.5vw, 2100px);
+      padding: 17.75vw 9.5vw 9.5vw;
+    }
+
+    .poster-copy {
+      margin-top: 15.25vw;
+      font-size: clamp(16px, 3.625vw, 29px);
+    }
+
+    .poster-rule {
+      margin-top: 8.25vw;
+    }
+
+    .poster-invite {
+      margin-top: 8.75vw;
+      font-size: clamp(13px, 2.75vw, 22px);
+    }
+
+    .poster-footer {
+      gap: 2.25vw;
+      font-size: clamp(9px, 2.125vw, 17px);
+    }
+
+    .ansi-icon {
+      width: 29.4vw;
+    }
+
+    .ansi-art-wide {
+      font-size: 2.1vw;
+    }
+
+    .ansi-art-lcr {
+      font-size: 3.625vw;
+    }
   }
 
   @supports (font-size: 1cqi) {
