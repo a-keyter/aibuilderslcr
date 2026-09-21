@@ -72,7 +72,7 @@ Copyable ANSI-style text variations for the AI Builders LCR hero.
 ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝  ╚══════╝ ╚═════╝╚═╝  ╚═╝
 ```
 
-## Three-Word Grouping
+## Three-Word Grouping: AI BUILDERS LCR
 
 ### AI BUILDERS LCR
 
